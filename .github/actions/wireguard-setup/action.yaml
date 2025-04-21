@@ -1,0 +1,35 @@
+name: Wireguard set up
+description: Setting up wireguard
+inputs:
+  endpoint:
+    required: true
+    description: "wg endpoint"
+  public_key:
+    required: true
+    description: "wg public key"
+  private_key:
+    required: true
+    description: "wg private_key"
+  preshared_key:
+    required: true
+    description: "wg preshared_key"
+  assigned_ip:
+    description: "wg assigned_ip"
+    default: 192.168.0.5
+  allowed_ips:
+    description: "wg allowed_ips"
+    default: 192.168.0.0/24
+
+runs:
+  using: composite
+  steps:
+    - name: Wireguard connection
+      shell: bash
+      env:
+        ARG_ENDPOINT: ${{ inputs.endpoint }}
+        ARG_ENDPOINT_PUBLIC_KEY: ${{ inputs.public_key }}
+        ARG_ASSIGNED_IP: ${{ inputs.assigned_ip }}
+        ARG_ALLOWED_IPS: ${{ inputs.allowed_ips }}
+        ARG_PRIVATE_KEY: ${{ inputs.private_key }}
+        ARG_PRESHARED_KEY: ${{ inputs.preshared_key }}
+      run: chmod +x scripts/wg_setup.sh && scripts/wg_setup.sh
