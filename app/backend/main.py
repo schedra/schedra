@@ -8,7 +8,6 @@ app = FastAPI()
 STATIC_DIR = os.path.join(os.path.dirname(__file__), "/app/frontend/build")
 index_file = os.path.join(STATIC_DIR, "index.html")
 
-# Монтируем статику отдельно
 app.mount("/static", StaticFiles(directory=os.path.join(STATIC_DIR, "static")), name="static")
 
 @app.get("/api/hello")
@@ -24,7 +23,6 @@ def hello(request: Request, domain: str = "", path: str = ""):
     msg = greetings.get(route, f"👋 Hello! You are at /{route}")
     return JSONResponse(content={"message": msg})
 
-# SPA fallback для всех маршрутов
 @app.get("/{full_path:path}")
 async def spa_handler(full_path: str):
     return FileResponse(index_file)
