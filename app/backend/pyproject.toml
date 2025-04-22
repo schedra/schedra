@@ -1,0 +1,49 @@
+[project]
+name = "schedra"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "Aleksei Pulich",email = "alexpulich@gmail.com"}
+]
+license = {text = "GPL-3.0"}
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+]
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.group.dev.dependencies]
+pre-commit = "^4.2.0"
+ruff = "^0.11.6"
+
+[tool.mypy]
+python_version = "3.11"
+warn_unused_configs = true
+ignore_missing_imports = true
+disallow_untyped_calls = true
+disallow_untyped_defs = true
+
+[tool.ruff]
+line-length = 120
+lint.select = [
+    "E",  # pycodestyle errors
+    "W",  # pycodestyle warnings
+    "F",  # pyflakes
+    "I",  # isort
+    "C",  # flake8-comprehensions
+    "B",  # flake8-bugbear
+]
+
+[tool.ruff.format]
+quote-style = "single"
+
+[tool.ruff.lint.isort]
+order-by-type = true
+relative-imports-order = "closest-to-furthest"
+extra-standard-library = ["typing"]
+section-order = ["future", "standard-library", "third-party", "first-party", "local-folder"]
+known-first-party = []
+
